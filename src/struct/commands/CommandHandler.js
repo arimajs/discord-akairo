@@ -1,7 +1,7 @@
 const AkairoError = require('../../util/AkairoError');
 const AkairoHandler = require('../AkairoHandler');
 const { BuiltInReasons, CommandHandlerEvents } = require('../../util/Constants');
-const { Collection } = require('discord.js');
+const { Collection } = require('discord.js-light');
 const Command = require('./Command');
 const CommandUtil = require('./CommandUtil');
 const Flag = require('./Flag');

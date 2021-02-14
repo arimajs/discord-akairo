@@ -1,18 +1,17 @@
 declare module 'discord-akairo' {
     import {
-        BufferResolvable, Client, Collection,
+        BufferResolvable, Client, ClientOptions, Collection,
         Message, MessageAttachment, MessageEmbed,
         MessageAdditions, MessageEditOptions, MessageOptions, SplitOptions,
         User, UserResolvable, GuildMember,
         Channel, Role, Emoji, Guild,
         PermissionResolvable, StringResolvable, Snowflake
-    } from 'discord.js';
-    import { ClientOptions } from 'discord.js-light';
+    } from 'discord.js-light';
 
     import { EventEmitter } from 'events';
     import { Stream } from 'stream';
 
-    module 'discord.js' {
+    module 'discord.js-light' {
         export interface Message {
             util?: CommandUtil;
         }

@@ -1,6 +1,6 @@
 const AkairoError = require('../../util/AkairoError');
 const AkairoHandler = require('../AkairoHandler');
-const { Collection } = require('discord.js');
+const { Collection } = require('discord.js-light');
 const { isEventEmitter } = require('../../util/Util');
 const Listener = require('./Listener');
 

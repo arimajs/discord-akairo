@@ -1,4 +1,4 @@
-const { APIMessage, Collection } = require('discord.js');
+const { APIMessage, Collection } = require('discord.js-light');
 
 /**
  * Command utilities.

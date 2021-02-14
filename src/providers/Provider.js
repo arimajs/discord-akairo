@@ -1,5 +1,5 @@
 const AkairoError = require('../util/AkairoError');
-const { Collection } = require('discord.js');
+const { Collection } = require('discord.js-light');
 
 /**
  * A provider for key-value storage.
