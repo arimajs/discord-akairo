@@ -19,7 +19,7 @@
     ],
     "dependencies": {
         "bufferutil": "^4.0.3",
-        "discord.js-light": "git://github.com/timotejroiko/discord.js-light#master",
+        "discord.js-light": "^3.5.3",
         "erlpack": "github:discord/erlpack",
         "utf-8-validate": "^5.0.4",
         "zlib-sync": "^0.1.7"
