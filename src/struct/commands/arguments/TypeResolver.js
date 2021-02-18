@@ -391,6 +391,17 @@ class TypeResolver {
                 return message.guild.channels.fetch(id[1], false).catch(() => null) || null;
             },
 
+            [ArgumentTypes.CHANNEL_MENTIONS]: async (message, phrase) => {
+                const ids = phrase.match(/(?:<#)?(\d{17,19})>?/g);
+                if (!ids.length) return null;
+                if (ids.length > 1) {
+                    const cache = await message.guild.channels.fetch(false);
+                    const channels = ids.map(id => cache.get(id)).filter(Boolean);
+                    return channels.length ? channels : null;
+                }
+                return message.guild.channels.fetch(ids[1], false).catch(() => null) || null;
+            },
+
             [ArgumentTypes.ROLE_MENTION]: (message, phrase) => {
                 if (!phrase) return null;
                 const id = phrase.match(/<@&(\d{17,19})>/);
