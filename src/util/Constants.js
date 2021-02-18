@@ -52,6 +52,7 @@ module.exports = {
         INVITE: 'invite',
         MEMBER_MENTION: 'memberMention',
         CHANNEL_MENTION: 'channelMention',
+        CHANNEL_MENTIONS: 'channelMentions',
         ROLE_MENTION: 'roleMention',
         EMOJI_MENTION: 'emojiMention',
         COMMAND_ALIAS: 'commandAlias',
