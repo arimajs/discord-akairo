@@ -379,16 +379,16 @@ class TypeResolver {
 
             [ArgumentTypes.MEMBER_MENTION]: (message, phrase) => {
                 if (!phrase) return null;
-                const id = phrase.match(/<@!?(\d{17,19})>/);
+                const id = phrase.match(/(?:<@!?)?(\d{17,19})>?/);
                 if (!id) return null;
-                return message.guild.members.cache.get(id[1]) || null;
+                return message.guild.members.fetch(id[1]).catch(() => null) || null;
             },
 
             [ArgumentTypes.CHANNEL_MENTION]: (message, phrase) => {
                 if (!phrase) return null;
-                const id = phrase.match(/<#(\d{17,19})>/);
+                const id = phrase.match(/(?:<#)?(\d{17,19})>?/);
                 if (!id) return null;
-                return message.guild.channels.cache.get(id[1]) || null;
+                return message.guild.channels.fetch(id[1], false).catch(() => null) || null;
             },
 
             [ArgumentTypes.ROLE_MENTION]: (message, phrase) => {
