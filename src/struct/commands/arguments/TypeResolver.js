@@ -399,7 +399,8 @@ class TypeResolver {
                     const channels = ids.map(id => cache.get(id)).filter(Boolean);
                     return channels.length ? channels : null;
                 }
-                return message.guild.channels.fetch(ids[1], false).catch(() => null) || null;
+                const channel = await message.guild.channels.fetch(ids[1], false).catch(() => null) || null;
+                return channel && [channel];
             },
 
             [ArgumentTypes.ROLE_MENTION]: (message, phrase) => {
