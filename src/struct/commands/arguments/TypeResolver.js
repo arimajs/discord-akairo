@@ -392,7 +392,7 @@ class TypeResolver {
             },
 
             [ArgumentTypes.CHANNEL_MENTIONS](message) {
-                return message.mentions.channels;
+                return message.mentions.channels.size ? message.mentions.channels : null;
             },
 
             [ArgumentTypes.ROLE_MENTION]: (message, phrase) => {
