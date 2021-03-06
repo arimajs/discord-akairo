@@ -384,11 +384,19 @@ class TypeResolver {
                 return message.guild.members.fetch(id[1], false).catch(() => null) || null;
             },
 
-            async [ArgumentTypes.MEMBER_MENTIONS](message, phrase) {
+            async [ArgumentTypes.MEMBER_OR_ROLE_MENTIONS](message, phrase) {
                 if (!phrase) return null;
-                const members = (await Promise.all(phrase.split(' ').map(
-                    member => this[ArgumentTypes.MEMBER_MENTION](message, member)
-                ))).filter(Boolean);
+                const members = (
+                    await Promise.all(
+                        phrase.split(' ').map(
+                            id => /(<@!?)?(\d{17,19})>?/.test(id)
+                                ? this[ArgumentTypes.MEMBER_MENTION](message, id)
+                                : /(<@&)?(\d{17,19})>?/.test(id)
+                                    ? this[ArgumentTypes.ROLE_MENTION](message, id)
+                                    : null
+                        )
+                    )
+                ).filter(Boolean);
                 return members.length ? members : null;
             },
 
@@ -402,9 +410,9 @@ class TypeResolver {
 
             [ArgumentTypes.ROLE_MENTION]: (message, phrase) => {
                 if (!phrase) return null;
-                const id = phrase.match(/<@&(\d{17,19})>/);
+                const id = phrase.match(/(?:<@&)?(\d{17,19})>?/);
                 if (!id) return null;
-                return message.guild.roles.cache.get(id[1]) || null;
+                return message.guild.roles.fetch(id[1], false).catch(() => null) || null;
             },
 
             [ArgumentTypes.EMOJI_MENTION]: (message, phrase) => {
