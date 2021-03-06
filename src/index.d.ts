@@ -751,7 +751,9 @@ declare module '@arimajs/discord-akairo' {
             GUILD_MESSAGE: 'guildMessage';
             INVITE: 'invite';
             MEMBER_MENTION: 'memberMention';
+            MEMBER_MENTIONS: 'memberMentions';
             CHANNEL_MENTION: 'channelMention';
+            CHANNEL_MENTIONS: 'channelMentions';
             ROLE_MENTION: 'roleMention';
             EMOJI_MENTION: 'emojiMention';
             COMMAND_ALIAS: 'commandAlias';

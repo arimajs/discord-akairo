@@ -381,17 +381,22 @@ class TypeResolver {
                 if (!phrase) return null;
                 const id = phrase.match(/(?:<@!?)?(\d{17,19})>?/);
                 if (!id) return null;
-                return message.guild.members.fetch(id[1]).catch(() => null) || null;
+                return message.guild.members.fetch(id[1], false).catch(() => null) || null;
             },
 
-            [ArgumentTypes.CHANNEL_MENTION]: (message, phrase) => {
+            async [ArgumentTypes.MEMBER_MENTIONS](message, phrase) {
                 if (!phrase) return null;
-                const id = phrase.match(/(?:<#)?(\d{17,19})>?/);
-                if (!id) return null;
-                return message.guild.channels.fetch(id[1], false).catch(() => null) || null;
+                const members = await Promise.all(phrase.split(' ').map(
+                    member => this[ArgumentTypes.MEMBER_MENTION](message, member)
+                ));
+                return members.some(Boolean) ? members : null;
             },
 
-            [ArgumentTypes.CHANNEL_MENTIONS](message) {
+            [ArgumentTypes.CHANNEL_MENTION]: message => {
+                return message.mentions.channels.first() || null;
+            },
+
+            [ArgumentTypes.CHANNEL_MENTIONS]: message => {
                 return message.mentions.channels.size ? message.mentions.channels : null;
             },
 
