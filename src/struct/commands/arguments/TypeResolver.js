@@ -386,10 +386,10 @@ class TypeResolver {
 
             async [ArgumentTypes.MEMBER_MENTIONS](message, phrase) {
                 if (!phrase) return null;
-                const members = await Promise.all(phrase.split(' ').map(
+                const members = (await Promise.all(phrase.split(' ').map(
                     member => this[ArgumentTypes.MEMBER_MENTION](message, member)
-                ));
-                return members.some(Boolean) ? members : null;
+                ))).filter(Boolean);
+                return members.length ? members : null;
             },
 
             [ArgumentTypes.CHANNEL_MENTION]: message => {
