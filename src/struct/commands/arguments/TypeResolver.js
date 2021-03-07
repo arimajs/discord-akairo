@@ -388,7 +388,7 @@ class TypeResolver {
                 if (!phrase) return null;
                 const members = (
                     await Promise.all(
-                        phrase.split(' ').map(
+                        phrase.split(/\s+/).map(
                             id => /(<@!?)?(\d{17,19})>?/.test(id)
                                 ? this[ArgumentTypes.MEMBER_MENTION](message, id)
                                 : /(<@&)?(\d{17,19})>?/.test(id)
