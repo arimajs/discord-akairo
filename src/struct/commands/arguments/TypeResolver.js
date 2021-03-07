@@ -384,20 +384,17 @@ class TypeResolver {
                 return message.guild.members.fetch(id[1], false).catch(() => null) || null;
             },
 
-            async [ArgumentTypes.MEMBER_OR_ROLE_MENTIONS](message, phrase) {
+            [ArgumentTypes.MEMBERS_OR_ROLES]: async (message, phrase) => {
                 if (!phrase) return null;
-                const members = (
-                    await Promise.all(
-                        phrase.split(/\s+/).map(
-                            id => /(<@!?)?(\d{17,19})>?/.test(id)
-                                ? this[ArgumentTypes.MEMBER_MENTION](message, id)
-                                : /(<@&)?(\d{17,19})>?/.test(id)
-                                    ? this[ArgumentTypes.ROLE_MENTION](message, id)
-                                    : null
-                        )
-                    )
-                ).filter(Boolean);
-                return members.length ? members : null;
+                const [members, roles] = await Promise.all([
+                    message.guild.members.fetch(false),
+                    message.guild.roles.fetch(false)
+                ]);
+
+                const foundRoles = this.client.util.resolveRoles(phrase, roles).array();
+                const foundMembers = this.client.util.resolveMembers(phrase, members).array();
+                const found = (foundRoles || []).concat(foundMembers || []);
+                return found.length ? foundRoles : null;
             },
 
             [ArgumentTypes.CHANNEL_MENTION]: message => {
