@@ -394,7 +394,7 @@ class TypeResolver {
                 const foundRoles = this.client.util.resolveRoles(phrase, roles).array();
                 const foundMembers = this.client.util.resolveMembers(phrase, members).array();
                 const found = (foundRoles || []).concat(foundMembers || []);
-                return found.length ? foundRoles : null;
+                return found.length ? found : null;
             },
 
             [ArgumentTypes.CHANNEL_MENTION]: message => {
