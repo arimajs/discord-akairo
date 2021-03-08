@@ -51,7 +51,7 @@ module.exports = {
         RELEVANT_MESSAGE: 'relevantMessage',
         INVITE: 'invite',
         MEMBER_MENTION: 'memberMention',
-        MEMBERS_OR_ROLES: 'memberOrRoleMentions',
+        MEMBERS_OR_ROLES: 'membersOrRoles',
         CHANNEL_MENTION: 'channelMention',
         CHANNEL_MENTIONS: 'channelMentions',
         ROLE_MENTION: 'roleMention',
